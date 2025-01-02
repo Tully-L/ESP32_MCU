@@ -20,11 +20,11 @@
 
 // 阈值结构体
 struct Thresholds {
-    float temp_high = 30.0;
+    float temp_high = 18.0;    
     float temp_low = 9.0;
-    float humi_high = 95.0;
+    float humi_high = 60.0;    
     float humi_low = 20.0;
-    float light_high = 1000.0;
+    float light_high = 200.0;  
     float light_low = 10.0;
 };
 
@@ -79,11 +79,11 @@ bool manualState[3] = {false, false, false};
 // 加载配置
 void loadConfig() {
     preferences.begin("thresholds", true);
-    thresholds.temp_high = preferences.getFloat("temp_h", 30.0);
+    thresholds.temp_high = preferences.getFloat("temp_h", 18.0);  
     thresholds.temp_low = preferences.getFloat("temp_l", 9.0);
-    thresholds.humi_high = preferences.getFloat("humi_h", 95.0);
+    thresholds.humi_high = preferences.getFloat("humi_h", 60.0);  
     thresholds.humi_low = preferences.getFloat("humi_l", 20.0);
-    thresholds.light_high = preferences.getFloat("light_h", 1000.0);
+    thresholds.light_high = preferences.getFloat("light_h", 200.0);  
     thresholds.light_low = preferences.getFloat("light_l", 10.0);
     preferences.end();
 }
