@@ -1,0 +1,88 @@
+按功能模块详细解析代码：
+
+1. **硬件配置**：
+```cpp
+// 引脚定义
+#define LED_Green  14    // 温度报警LED
+#define LED_Yellow 12    // 湿度报警LED
+#define LED_Red    13    // 光照报警LED
+#define DHT11_PIN  15    // DHT11温湿度传感器
+```
+
+2. **系统参数**：
+```cpp
+// 系统常量
+#define SAMPLE_PERIOD 2    // 采样周期2秒
+#define QUEUE_SIZE 30      // 保存30组历史数据
+#define MAX_ALARMS 10      // 最多保存10条报警记录
+
+// 阈值设置
+struct Thresholds {
+    float temp_high = 18.0;    // 温度上限
+    float temp_low = 9.0;      // 温度下限
+    float humi_high = 60.0;    // 湿度上限
+    float humi_low = 20.0;     // 湿度下限
+    float light_high = 200.0;  // 光照上限
+    float light_low = 10.0;    // 光照下限
+};
+```
+
+3. **数据结构**：
+```cpp
+// 数据点结构
+struct DataPoint {
+    float value;           // 测量值
+    uint32_t timestamp;    // 时间戳
+};
+
+// 报警记录结构
+struct AlarmRecord {
+    float value;          // 报警值
+    char type;           // 报警类型
+    uint32_t timestamp;   // 报警时间
+};
+```
+
+4. **显示界面**：
+```cpp
+enum DisplayMode {
+    REALTIME_DATA = 0,    // 实时数据页面
+    TREND_GRAPH,          // 趋势图页面
+    ALARM_DATA,           // 报警记录页面
+    PARAMETERS,           // 参数设置页面
+    MAX_MODES
+};
+```
+
+5. **主要功能函数**：
+   - `loadConfig()`: 从Flash加载配置
+   - `saveConfig()`: 保存配置到Flash
+   - `addAlarmRecord()`: 添加新报警记录
+   - `updateDataQueues()`: 更新数据队列
+   - `processSerialCommand()`: 处理串口命令
+   - `drawXXX()`: 各种显示界面绘制函数
+
+6. **串口命令支持**：
+   - `page0-3`: 切换显示页面
+   - `scroll`: 开启/关闭自动循环显示
+   - `TH/TL`: 设置温度阈值
+   - `HH/HL`: 设置湿度阈值
+   - `LH/LL`: 设置光照阈值
+   - `history`: 显示报警历史
+   - `[0-2][0-1]`: LED手动控制
+
+7. **主循环功能**：
+   - 定时采样传感器数据
+   - 检查报警条件
+   - 控制LED指示
+   - 更新显示界面
+   - 处理串口命令
+
+8. **特色功能**：
+   - 开机动画效果
+   - 自动循环显示
+   - LED状态指示
+   - 数据持久化存储
+   - 实时趋势图显示
+
+这个系统实现了完整的环境监测功能，包括数据采集、显示、存储、报警和人机交互等功能。代码结构清晰，模块化程度高，便于维护和扩展。
