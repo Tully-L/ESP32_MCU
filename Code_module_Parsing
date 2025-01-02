@@ -1,3 +1,10 @@
+{
+VS Code
+WeMos 0.96寸OLED ESP32 WIFI蓝牙模块CP2102开发板ESP32
+开源环境——PlatformIO （开源的物联网开发生态系统）
+Sensor-BH1750/LED/DHT11/OLED
+}
+
 按功能模块详细解析代码：
 
 1. **硬件配置**：
